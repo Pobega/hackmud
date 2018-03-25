@@ -21,7 +21,7 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 //   █▄▄▄▄▄█ █▀█▄▀▄█▀▀█  ▄██▄█▄▄▀ ▀  ▄
 //   http://github.com/Pobega/hackmud
 //
-// :::TRUST COMMUNICATION::: {security_level:4, length:132}
+// :::TRUST COMMUNICATION::: {security_level:4, length:492}
 //
 // This script is the answer to the wolf and up CON_SPEC response.
 // Pass it as a scriptor to CON_SPEC to pass the lock.
