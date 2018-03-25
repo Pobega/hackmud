@@ -1,4 +1,4 @@
-function (c,a) {
+function (c,a) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 
 //
 //   Author: Pobega
