@@ -32,8 +32,8 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
     // Ensure that args were passed, and that those args are exactly
     // d:<digit> and s:<string>. Anything else, show the usage screen.
     try {
-	if(!args.d)
-	    throw "D != #"
+        if(!args.d)
+            throw "D != #"
         return (args.s.match(new RegExp(args.d,"g")) || []).length
     } catch(e) {
         return {ok:false, msg:`
