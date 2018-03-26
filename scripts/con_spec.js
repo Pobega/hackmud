@@ -21,7 +21,7 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 //   █▄▄▄▄▄█ █▀█▄▀▄█▀▀█  ▄██▄█▄▄▀ ▀  ▄
 //   http://github.com/Pobega/hackmud
 //
-// :::TRUST COMMUNICATION::: {security_level:4, length:492}
+// :::TRUST COMMUNICATION::: {security_level:4, length:464}
 //
 // This script is the answer to the wolf and up CON_SPEC response.
 // Pass it as a scriptor to CON_SPEC to pass the lock.
@@ -29,7 +29,11 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 // Ex: npc.loc{CON_SPEC:#s.user.con_spec}
 //
 
-    if (args == undefined || args.d.constructor != Number || args.s.constructor != String) {
+    // Ensure that args were passed, and that those args are exactly
+    // d:<digit> and s:<string>. Anything else, show the usage screen.
+    if (!args
+        || !((args.d && args.d.constructor == Number)
+        &&   (args.s && args.s.constructor == String))) {
         let usage = `
 Tier 2 \`DCON_SPEC\` lock scriptor
 
@@ -46,14 +50,13 @@ Tier 2 \`DCON_SPEC\` lock scriptor
         return {ok:false, msg:usage}
     }
 
-    var count = 0,
-        string = args.s,
-        digit = args.d
+    var total = 0,
+        i
 
     // Count the occurences of a digit in a string
-    for ( var i=0; i < string.length; i++ ) {
-        if (string[i] == digit)
-            count++
+    for ( i in args.s ) {
+        if (args.s[i] == args.d)
+            total++
     }
-    return count
+    return total
 }
