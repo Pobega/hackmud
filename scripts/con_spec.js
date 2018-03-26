@@ -1,4 +1,4 @@
-function test(context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
+function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 
 //
 //   Author: Pobega
