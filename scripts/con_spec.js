@@ -21,7 +21,7 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 //   █▄▄▄▄▄█ █▀█▄▀▄█▀▀█  ▄██▄█▄▄▀ ▀  ▄
 //   http://github.com/Pobega/hackmud
 //
-// :::TRUST COMMUNICATION::: {security_level:4, length:464}
+// :::TRUST COMMUNICATION::: {security_level:4, length:437}
 //
 // This script is the answer to the wolf and up CON_SPEC response.
 // Pass it as a scriptor to CON_SPEC to pass the lock.
@@ -34,7 +34,7 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
     if (!args
         || !((args.d && args.d.constructor == Number)
         &&   (args.s && args.s.constructor == String))) {
-        let usage = `
+        return {ok:false, msg:`
 Tier 2 \`DCON_SPEC\` lock scriptor
 
 \`2DESCRIPTION\`
@@ -46,8 +46,7 @@ Tier 2 \`DCON_SPEC\` lock scriptor
   As a scriptor: \{ \`NCON_SPEC\`:#s.${context.this_script}\ }
 
   To test: ${context.this_script} \{ \`Ns\`:\`V<string>\`, \`Nd\`:\`V<int>\`\ }
-`
-        return {ok:false, msg:usage}
+`}
     }
 
     // Count the occurences of a digit in a string
