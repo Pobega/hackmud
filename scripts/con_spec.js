@@ -1,4 +1,4 @@
-function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
+function test(context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 
 //
 //   Author: Pobega
@@ -28,27 +28,22 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 //
 // Ex: npc.loc{CON_SPEC:#s.user.con_spec}
 //
-
+    
     // Ensure that args were passed, and that those args are exactly
     // d:<digit> and s:<string>. Anything else, show the usage screen.
-    if (!args
-        || !((args.d && args.d.constructor == Number)
-        &&   (args.s && args.s.constructor == String))) {
+    try {
+	if(!args.d)
+	    throw "D != #"
+        return (args.s.match(new RegExp(args.d,"g",)) || []).length
+    } catch(e) {
         return {ok:false, msg:`
 Tier 2 \`DCON_SPEC\` lock scriptor
-
 \`2DESCRIPTION\`
-
   Counts how many occurences of the digit (\`Nd\`) are in the string (\`Ns\`).
-
 \`2USAGE\`
-
   As a scriptor: \{ \`NCON_SPEC\`:#s.${context.this_script}\ }
-
   To test: ${context.this_script} \{ \`Ns\`:\`V<string>\`, \`Nd\`:\`V<int>\`\ }
 `}
     }
 
-    // Count the occurences of a digit in a string
-    return (args.s.match(new RegExp(args.d, "g")) || []).length
 }
