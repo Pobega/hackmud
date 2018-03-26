@@ -34,7 +34,7 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
     try {
 	if(!args.d)
 	    throw "D != #"
-        return (args.s.match(new RegExp(args.d,"g",)) || []).length
+        return (args.s.match(new RegExp(args.d,"g")) || []).length
     } catch(e) {
         return {ok:false, msg:`
 Tier 2 \`DCON_SPEC\` lock scriptor
