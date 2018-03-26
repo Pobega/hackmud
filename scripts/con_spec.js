@@ -50,13 +50,6 @@ Tier 2 \`DCON_SPEC\` lock scriptor
         return {ok:false, msg:usage}
     }
 
-    var total = 0,
-        i
-
     // Count the occurences of a digit in a string
-    for ( i in args.s ) {
-        if (args.s[i] == args.d)
-            total++
-    }
-    return total
+    return (args.s.match(new RegExp(args.d, "g")) || []).length
 }
