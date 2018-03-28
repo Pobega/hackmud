@@ -26,7 +26,7 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 // This script is the answer to the wolf and up CON_SPEC response.
 // Pass it as a scriptor to CON_SPEC to pass the lock.
 //
-// Ex: npc.loc{CON_SPEC:#s.user.con_spec}
+// Ex: target.loc{CON_SPEC:#s.user.con_spec}
 //
 
     // Ensure that args were passed, and that those args are exactly
