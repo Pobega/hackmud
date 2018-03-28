@@ -1,11 +1,17 @@
-function (c,a) {
+function (c,a) { // sec:"all"
 
     // Security levels with their associated colors, to be output later.
-    let avail = {0: {level:"NULLSEC", scripts:[]},
-                 1: {level:"LOWSEC", scripts:[]},
-                 2: {level:"MIDSEC", scripts:[]},
-                 3: {level:"HIGHSEC", scripts:[]},
-                 4: {level:"FULLSEC", scripts:[]}},
+    let avail = {0: {level:"`eNULLSEC`", scripts:[]},
+                 1: {level:"`DLOWSEC`", scripts:[]},
+                 2: {level:"`5MIDSEC`", scripts:[]},
+                 3: {level:"`JHIGHSEC`", scripts:[]},
+                 4: {level:"`2FULLSEC`", scripts:[]}},
+
+        interpret_args = {full: 4,
+                          high: 3,
+                          mid: 2,
+                          low: 1,
+                          "null": 0},
 
     // All current NPC corps
         corps = ["amal_robo",
@@ -56,12 +62,14 @@ function (c,a) {
         scripts = ["employees",
                    "employee_login",
                    "emplogin",
+                   "intern",
                    "internal",
                    "memberlogin",
                    "members",
                    "members_only",
                    "member_access",
                    "priv",
+                   "private",
                    "public"]
 
 
@@ -76,7 +84,17 @@ function (c,a) {
         })
     })
 
+    // Not getting fancy here, just want to show the scripts in
+    // decreasing order of security level.
+    let output = "Use {sec:\"full\" to see fullsec scripts. Default behavior is {sec:\"all\"}\n\n\n",
+        i=4
+    for ( ; i>=0; i-- ) {
+        output += `${avail[i]["level"]} (${avail[i]["scripts"].length})\n`
+        avail[i]["scripts"].forEach((script) => {
+            output += `    ${script}\n`
+        })
+        output += "\n\n"
+    }
 
-    // TODO: print this more pretty
-    return avail
+    return output
 }
