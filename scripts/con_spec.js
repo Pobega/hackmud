@@ -38,10 +38,15 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
     } catch(e) {
         return {ok:false, msg:`
 Tier 2 \`DCON_SPEC\` lock scriptor
+
 \`2DESCRIPTION\`
+
   Counts how many occurences of the digit (\`Nd\`) are in the string (\`Ns\`).
+
 \`2USAGE\`
+
   As a scriptor: \{ \`NCON_SPEC\`:#s.${context.this_script}\ }
+
   To test: ${context.this_script} \{ \`Ns\`:\`V<string>\`, \`Nd\`:\`V<int>\`\ }
 `}
     }
