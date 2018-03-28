@@ -1,10 +1,11 @@
 function (c,a) {
 
     // Security levels with their associated colors, to be output later.
-    let seclvls = {4:"`2FULLSEC`",
-                   3:"`JHIGHSEC`",
-                   2:"`5MIDSEC`",
-                   1:"`DLOWSEC`"},
+    let avail = {0: {level:"NULLSEC", scripts:[]},
+                 1: {level:"LOWSEC", scripts:[]},
+                 2: {level:"MIDSEC", scripts:[]},
+                 3: {level:"HIGHSEC", scripts:[]},
+                 4: {level:"FULLSEC", scripts:[]}},
 
     // All current NPC corps
         corps = ["amal_robo",
@@ -61,26 +62,21 @@ function (c,a) {
                    "members_only",
                    "member_access",
                    "priv",
-                   "public"],
+                   "public"]
 
-        // Used for storing currently available NPC corp scripts with
-        // relation to their security level (4-FULLSEC, 1-LOWSEC)
-        results = {1: [],
-                   2: [],
-                   3: [],
-                   4: []}
 
     corps.forEach((corp) => { // For each corp
         scripts.forEach((script) => { // And for each script name
             let corp_script = `${corp}.${script}`,
                 level = #fs.scripts.get_level({name:corp_script})
             // If the sec level is in the list of sec levels (1~4)
-            if (!(seclvls[level] === undefined))
+            if (!(avail[level] === undefined))
                 // Push it to the results.
-                results[level].push(corp_script)
+                avail[level]["scripts"].push(corp_script)
         })
     })
 
+
     // TODO: print this more pretty
-    return results
+    return avail
 }
