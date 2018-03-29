@@ -100,13 +100,12 @@ function (c,a) { // sec:"all"
     // decreasing order of security level.
     let output ="\n"
 
-    // If you passed an arg to see just one sec level
-    if (a.sec && map_args[a.sec]) {
+    try { // If you passed an arg to see just one sec level
         let level = map_args[a.sec]
         output += get_scripts(level)
-    } else { // If not, show every sec level
-        if (!a.sec) // If the user passed NO args, show usage info
-            output += "Use {sec:\"full\"} to see fullsec scripts. Default behavior is {sec:\"all\"}\n\n"
+    }
+    catch(e) { // If not, show every sec level
+        output += "Use {sec:\"full\"} to see fullsec scripts. Default behavior is {sec:\"all\"}\n\n"
         for ( let i=4; i>=0; i-- )
             output += get_scripts(i) + "\n"
     }
