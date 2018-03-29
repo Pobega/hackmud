@@ -7,11 +7,16 @@ function (c,a) { // sec:"all"
                  3: {level:"`JHIGHSEC`", scripts:[]},
                  4: {level:"`2FULLSEC`", scripts:[]}},
 
-        interpret_args = {full: 4,
-                          high: 3,
-                          mid: 2,
-                          low: 1,
-                          "null": 0},
+        map_args = {full: 4,
+                    fullsec: 4,
+                    high: 3,
+                    highsec: 3,
+                    midsec: 2,
+                    mid: 2,
+                    low: 1,
+                    lowsec: 1,
+                    "null": 0,
+                    "nullsec": 0},
 
     // All current NPC corps
         corps = ["amal_robo",
@@ -72,6 +77,13 @@ function (c,a) { // sec:"all"
                    "private",
                    "public"]
 
+    function get_scripts(level) {
+        let output = `${avail[level]["level"]} (${avail[level]["scripts"].length})\n`
+        avail[level]["scripts"].forEach((script) => {
+            output += `    ${script}\n`
+        })
+        return output
+    }
 
     corps.forEach((corp) => { // For each corp
         scripts.forEach((script) => { // And for each script name
@@ -86,14 +98,17 @@ function (c,a) { // sec:"all"
 
     // Not getting fancy here, just want to show the scripts in
     // decreasing order of security level.
-    let output = "Use {sec:\"full\" to see fullsec scripts. Default behavior is {sec:\"all\"}\n\n\n",
-        i=4
-    for ( ; i>=0; i-- ) {
-        output += `${avail[i]["level"]} (${avail[i]["scripts"].length})\n`
-        avail[i]["scripts"].forEach((script) => {
-            output += `    ${script}\n`
-        })
-        output += "\n\n"
+    let output ="\n"
+
+    // If you passed an arg to see just one sec level
+    if (a.sec && map_args[a.sec]) {
+        let level = map_args[a.sec]
+        output += get_scripts(level)
+    } else { // If not, show every sec level
+        if (!a.sec) // If the user passed NO args, show usage info
+            output += "Use {sec:\"full\"} to see fullsec scripts. Default behavior is {sec:\"all\"}\n\n"
+        for ( let i=4; i>=0; i-- )
+            output += get_scripts(i) + "\n"
     }
 
     return output
