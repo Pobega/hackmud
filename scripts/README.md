@@ -1,7 +1,9 @@
-# Pobega's hackmud scripts
+# ｓｃｒｉｐｔｓ
 
-Scripts I use in the MMOMUD hackmud.
+## t1_scrape
 
-## t1_scrape.js
+A simple scraping tool to gather T1 locs from T1 corps
 
-A simple scraping tool to gather T1 locs from T1 corps.
+## con_spec
+
+An answer to the T2 CON_SPEC lock
