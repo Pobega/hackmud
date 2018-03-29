@@ -26,14 +26,16 @@ function (context, args) { // T2 CON_SPEC passes in {s:"string", d:"digit"}
 // This script is the answer to the wolf and up CON_SPEC response.
 // Pass it as a scriptor to CON_SPEC to pass the lock.
 //
-// Ex: npc.loc{CON_SPEC:#s.user.con_spec}
+// Ex: target.loc{CON_SPEC:#s.user.con_spec}
 //
-
+    
     // Ensure that args were passed, and that those args are exactly
     // d:<digit> and s:<string>. Anything else, show the usage screen.
-    if (!args
-        || !((args.d && args.d.constructor == Number)
-        &&   (args.s && args.s.constructor == String))) {
+    try {
+        if(!args.d)
+            throw "D != #"
+        return (args.s.match(new RegExp(args.d,"g")) || []).length
+    } catch(e) {
         return {ok:false, msg:`
 Tier 2 \`DCON_SPEC\` lock scriptor
 
@@ -49,6 +51,4 @@ Tier 2 \`DCON_SPEC\` lock scriptor
 `}
     }
 
-    // Count the occurences of a digit in a string
-    return (args.s.match(new RegExp(args.d, "g")) || []).length
 }
