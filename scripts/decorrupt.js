@@ -3,7 +3,7 @@ function (c,a) {
     let r = /(¡|¢|£|¤|¥|¦|§|¨|©|ª|Ã|Á)/,
         // Regex to strip colors
         s = /`\w(.)`/g,
-        // Original script output
+        // Script caller command
         d = function() { return a.t.call().replace(s, "$1").split("") },
         // Original script output
         o = d()
