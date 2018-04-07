@@ -9,6 +9,12 @@ function (c,a) { // sec:"all"
                  lowsec:  [],
                  nullsec: []},
 
+        level_color = {fullsec: '`2',
+                       highsec: '`J',
+                       midsec: '`5',
+                       lowsec: '`D',
+                       nullsec: '`e'},
+
         // Map sec: args to their respective keys in avail
         map_args = {full: "fullsec",
                     fullsec: "fullsec",
@@ -80,14 +86,6 @@ function (c,a) { // sec:"all"
                    "private",
                    "public"]
 
-    function get_scripts(level) {
-        let output = `${avail[level]["level"]} (${avail[level]["scripts"].length})\n`
-        avail[level]["scripts"].forEach((script) => {
-            output += `    ${script}\n`
-        })
-        return output
-    }
-
     corps.forEach((corp) => { // For each corp
         scripts.forEach((script) => { // And for each script name
             let corp_script = `${corp}.${script}`,
@@ -106,6 +104,8 @@ function (c,a) { // sec:"all"
             if (map_args[a.sec])
                 // https://stackoverflow.com/a/11508530
                 return {[map_args[a.sec]]: avail[map_args[a.sec]]}
+            else if (a.sec == "all")
+                return avail
             else
                 return {ok:false, msg:"please use a valid sec level"}
         }
@@ -113,18 +113,31 @@ function (c,a) { // sec:"all"
             return avail
     }
 
+    // Function that prints out a human-readable list of scripts in a security level
+    function print_scripts(level) {
+        let sec_level = `${level_color[level]}${level.toUpperCase()}\``,
+            count = avail[level].length,
+            output = `${sec_level} (${count})\n`
+
+        avail[level].forEach((script) => {
+            output += `    ${script}\n`
+        })
+
+        return output
+    }
+
     let output="\n"
 
     // TODO: Get the output correctly using new data structures.
     try { // If you passed an arg to see just one sec level
         let level = map_args[a.sec]
-        output += get_scripts(level)
+        output += print_scripts(level)
     }
     catch(e) { // If not, show every sec level
-        output += "Use {sec:\"full\"} to see fullsec scripts. Default behavior is {sec:\"all\"}\n"
-        output += "Use {object:true} to get JSON output for use in scripts.\n\n"
-        for ( let i=4; i>=0; i-- )
-            output += get_scripts(i) + "\n"
+        output += "Use { sec:\"full\" } to see fullsec scripts. Default behavior is { sec:\"all\" }\n"
+        output += "Add { object:true } to get JSON output for use in scripts.\n\n"
+        for ( let key in avail )
+            output += print_scripts(key) + "\n"
     }
 
     return output
