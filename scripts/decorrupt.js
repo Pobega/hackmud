@@ -9,7 +9,7 @@ function (c,a) {
         o = d()
 
     // continue until original output has no more corruption
-    while (r.test(o.join(""))) {
+    while (r.test(o.join("")))
         // iterate over a fresh output
         d().forEach((p, i) => {
             // if the origin output has corruption,
@@ -17,7 +17,6 @@ function (c,a) {
             if (r.test(o[i]))
                     o[i] = p
         })
-    }
 
     return o.join("")
 }
