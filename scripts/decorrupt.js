@@ -1,4 +1,4 @@
-function (c,a) { // { t:<target> }
+function (c,a) { // t:#s.x.x, a:""
         // Corruption char regex
     let r = /[¡¢£¤¥¦§¨©ªÃÁ]/,
         // Regex to strip colors
