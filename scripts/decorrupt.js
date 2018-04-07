@@ -1,6 +1,6 @@
 function (c,a) {
         // Corruption char regex
-    let r = /(¡|¢|£|¤|¥|¦|§|¨|©|ª|Ã|Á)/,
+    let r = /[¡¢£¤¥¦§¨©ªÃÁ]/,
         // Regex to strip colors
         s = /`\w(.)`/g,
         // Script caller command
