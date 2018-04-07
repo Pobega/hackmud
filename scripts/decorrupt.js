@@ -12,9 +12,9 @@ function (c,a) {
     while (r.test(o.join(""))) {
         // iterate over a fresh output
         d().forEach((p, i) => {
-            // if the origin output has corruption and the new doesn't,
+            // if the origin output has corruption,
             // replace the corrpution with the proper char
-            if (r.test(o[i]) && !(r.test(p)))
+            if (r.test(o[i]))
                     o[i] = p
         })
     }
