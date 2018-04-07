@@ -1,6 +1,6 @@
-function (c,a) { // t:#s.x.x, a:""
-        // Corruption char regex
-    let r = /[¡¢£¤¥¦§¨©ªÃÁ]/,
+function (c,a) {
+    // Corruption char regex using scripts.lib()
+    let r = new RegExp(`[${#fs.scripts.lib().corruption_chars}]`),
         // Regex to strip colors
         s = /`\w(.)`/g,
         // Args to pass to scriptor
