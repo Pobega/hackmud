@@ -99,7 +99,7 @@ function (c,a) { // sec:"all"
     })
 
     // return avail or avail[level] if a.object is true
-    if (a.object) {
+    if (a && a.object) {
         if (a.sec) {
             if (map_args[a.sec])
                 // https://stackoverflow.com/a/11508530
