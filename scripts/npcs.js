@@ -1,6 +1,7 @@
 function (c,a) { // sec:"all"
 
     let lib = #fs.scripts.lib(),
+        plib = #fs.pobega.lib(),
 
         // Security levels with their associated colors, to be output later.
         avail = {fullsec: [],
@@ -9,11 +10,11 @@ function (c,a) { // sec:"all"
                  lowsec:  [],
                  nullsec: []},
 
-        level_color = {fullsec: '`2',
-                       highsec: '`J',
-                       midsec: '`5',
-                       lowsec: '`D',
-                       nullsec: '`e'},
+        level_color = {fullsec: '2',
+                       highsec: 'J',
+                       midsec: '5',
+                       lowsec: 'D',
+                       nullsec: 'e'},
 
         // Map sec: args to their respective keys in avail
         map_args = {full: "fullsec",
@@ -115,7 +116,7 @@ function (c,a) { // sec:"all"
 
     // Function that prints out a human-readable list of scripts in a security level
     function print_scripts(level) {
-        let sec_level = `${level_color[level]}${level.toUpperCase()}\``,
+        let sec_level = plib.color(level_color[level], level.toUpperCase()),
             count = avail[level].length,
             output = `${sec_level} (${count})\n`
 
