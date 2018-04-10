@@ -8,7 +8,7 @@ These are just some scripts developed by me and friends for the MMOMUD hackmud. 
 
 This is where runnable #up'd scripts are. Things like lock crackers, scrapers, and utilities.
 
-### libs/
+### lib/
 
 Libraries used for in-game scripts.
 
