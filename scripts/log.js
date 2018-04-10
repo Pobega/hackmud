@@ -1,5 +1,7 @@
 function (c,a) {
 
+  let lib = #fs.pobega.lib()
+
   // If #Global.log hasn't been created, instantiate it
   if (!#G.log)
     #G.log = []
@@ -9,7 +11,7 @@ function (c,a) {
     // _ST is a builtin for script StartTime. Comparible with Date lib times
     let time = (Date.now()-_ST).toString().padStart(4, "0")
     // Color the time white
-    return `\`1${time}\``
+    return lib.color("1", time)
   }
 
   // Push the log text into the array of logs
@@ -19,10 +21,10 @@ function (c,a) {
 
   class log {
     // Different loglevels with associated colors
-    error(msg)   { write_log("`DERR`", msg) }
-    debug(msg)   { write_log("`TDBG`", msg) }
-    info(msg)    { write_log("`PLOG`", msg) }
-    success(msg) { write_log("`lYAY`", msg) }
+    error(msg)   { write_log(lib.color("D", "ERR"), msg) }
+    debug(msg)   { write_log(lib.color("T", "DBG"), msg) }
+    info(msg)    { write_log(lib.color("P", "LOG"), msg) }
+    success(msg) { write_log(lib.color("l", "YAY"), msg) }
     // log.write() should be returned in the outer script to get output
     write()      { return #G.log.join("\n") }
   }
