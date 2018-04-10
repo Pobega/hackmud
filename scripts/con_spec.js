@@ -1,53 +1,24 @@
-function (context, args) { // T2 CON_SPEC passes in {s:"string", d:digit}
+function (c,a) { // T2 CON_SPEC passes in {s:"string", d:digit}
 
-//
-//   Author: Pobega
-//   ▄▄▄▄▄▄▄ ▄▄▄ ▄ ▄    ▄  ▄▄  ▄▄▄▄▄▄▄
-//   █ ▄▄▄ █ █▀█▄ ▄ ▄▀▄▀█▄▄█▄█ █ ▄▄▄ █
-//   █ ███ █ ▀▀ ▀ ▄█▄▄▄█▀▄ ▄█▀ █ ███ █
-//   █▄▄▄▄▄█ █ ▄▀█▀█ ▄▀▄▀▄ ▄ █ █▄▄▄▄▄█
-//   ▄▄  ▄▄▄  ▀ ▄▀▄█ ▀█▀ ██▀█▄  ▄ ▄▄▄▄
-//    ▄▄█ ▀▄█▀▀▀▄█▄▄█▄ ▀ ▄▀██ █ ▀▄▄█▄
-//   █ ▀██▄▄▀█ █▀▄█ ▀ █ ▀██▀ ▄▀█ █  ▀▄
-//   ██▀ ▄▄▄ █▄   ▀▀█▀▄█ ▄▀ █▀▀ █ █▄█
-//   ▄▀█  █▄▀███▄▀▄█▀▄█▀█▄█ ▄ █▄▀█  ██
-//   ▄▀ ▀▀▄▄█ ▀▀▄█▄▄█▀ █  ▀ █▀▀ ▀  ▀▄
-//     ▀   ▄▄ █ ▀▄█ █ █▀▀██▄██▄█ ▄  ▀▄
-//   ▀▀ ▀▀▀▄▄▄▄▀  ▀▀█▀▄▀ ▀  █ █▄█▄▀ ▄
-//   ▄▄█▀▄▀▄ ██▀▄▀▄█▄▀███▄█▄ ▄▄▄██  █▀
-//   ▄▄▄▄▄▄▄ ▀▄▄▄█▄▄█▀▀█ ▄█▄▀█ ▄ █▀▀▄
-//   █ ▄▄▄ █ █▀▄▀▄█  ▀█▀▄▀█▄ █▄▄▄██ █▀
-//   █ ███ █  █▀  ▀▀█▀█▀  ▄▀▀▀▀█▀█▄▄
-//   █▄▄▄▄▄█ █▀█▄▀▄█▀▀█  ▄██▄█▄▄▀ ▀  ▄
-//   http://github.com/Pobega/hackmud
-//
-// :::TRUST COMMUNICATION::: {security_level:4, length:437}
-//
-// This script is the answer to the wolf and up CON_SPEC response.
-// Pass it as a scriptor to CON_SPEC to pass the lock.
-//
-// Ex: target.loc{CON_SPEC:#s.user.con_spec}
-//
-    
+    let lib = #fs.pobega.lib()
+
     // Ensure that args were passed, and that those args are exactly
     // d:<digit> and s:<string>. Anything else, show the usage screen.
-    try {
-        if(!args.d)
-            throw "D != #"
+    if (c.is_scriptor) {
         return (args.s.match(new RegExp(args.d,"g")) || []).length
-    } catch(e) {
+    } else {
         return {ok:false, msg:`
-Tier 2 \`DCON_SPEC\` lock scriptor
+Tier 2 ${lib.color("D", "CON_SPEC")} lock scriptor
 
-\`2DESCRIPTION\`
+${lib.color("2", "DESCRIPTION")}
 
   Counts how many occurences of the digit (\`Nd\`) are in the string (\`Ns\`).
 
-\`2USAGE\`
+${lib.color("2", "USAGE")}
 
-  As a scriptor: \{ \`NCON_SPEC\`:#s.${context.this_script}\ }
+  As a scriptor: \{ ${lib.color("N", "CON_SPEC")}:#s.${c.this_script}\ }
 
-  To test: ${context.this_script} \{ \`Ns\`:\`V<string>\`, \`Nd\`:\`V<int>\`\ }
+  To test: ${c.this_script} \{ ${lib.color("N", "s")}:${lib.color("V", "<string>")}, ${lib.color("N", "d")}:${lib.color("V", "<int>")} \}
 `}
     }
 
