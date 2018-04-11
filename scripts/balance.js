@@ -6,7 +6,7 @@ function (c,a) {
         total = bal + l.to_gc_num(pay) + l.to_gc_num(jade)
 
         return `
-:::pobega.balance:::
+:::${c.this_script}:::
 
 accts.balance    ${l.to_gc_str(bal)}
 pay.pal          ${pay}
