@@ -33,7 +33,7 @@ Calling with args:
         //
         // I hate myself.
         //
-        d = function() { return ([].concat(a.t.call(x))).join("\n").toString().replace(s, "$1").split("") },
+        d = _ => ([].concat(a.t.call(x))).join("\n").toString().replace(s, "$1").split(""),
         // Original script output
         o = d()
 
