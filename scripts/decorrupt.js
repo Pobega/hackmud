@@ -1,16 +1,14 @@
 function (c,a) {
 
-    let lib = #fs.pobega.lib()
-
     if (!a || !a.t)
         return `
 :::${c.this_script}:::
 
-${lib.color("2", "DESCRIPTION")}
+\`2DESCRIPTION\`
 
 Decorrupts NPC script output
 
-${lib.color("2", "USAGE")}
+\`2USAGE\`
 
 Calling without args:
   ${c.this_script} { t:#s.npc.script }
