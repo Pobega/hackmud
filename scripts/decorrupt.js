@@ -1,4 +1,25 @@
 function (c,a) {
+
+    let lib = #fs.pobega.lib()
+
+    if (!a || !a.t)
+        return `
+:::${c.this_script}:::
+
+${lib.color("2", "DESCRIPTION")}
+
+Decorrupts NPC script output
+
+${lib.color("2", "USAGE")}
+
+Calling without args:
+  ${c.this_script} { t:#s.npc.script }
+
+Calling with args:
+  ${c.this_script} { t:#s.npc.script, a:{some:"args"} }
+
+`
+
     // Corruption char regex using scripts.lib()
     let r = new RegExp(`[${#fs.scripts.lib().corruption_chars}]`),
         // Regex to strip colors
