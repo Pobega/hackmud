@@ -5,19 +5,5 @@ function (c,a) { // T2 CON_SPEC passes in {s:"string", d:digit}
     if (c.is_scriptor || c.calling_script)
         return (args.s.match(new RegExp(args.d,"g")) || []).length
     else
-        return `
-:::${c.this_script}:::
-
-
-\`2DESCRIPTION\`
-
-  Tier 2 \`DCON_SPEC\` lock scriptor.
-
-  Counts how many occurences of the digit (\`Nd\`) are in the string (\`Ns\`).
-
-
-\`2USAGE\`
-
-  As a scriptor: \{ \`NCON_SPEC\`:#s.${c.this_script}\ }
-`
+        return #fs.pobega.usage()
 }

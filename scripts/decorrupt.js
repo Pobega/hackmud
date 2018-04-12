@@ -1,22 +1,7 @@
 function (c,a) {
 
     if (!a || !a.t)
-        return `
-:::${c.this_script}:::
-
-\`2DESCRIPTION\`
-
-Decorrupts NPC script output
-
-\`2USAGE\`
-
-Calling without args:
-  ${c.this_script} { t:#s.npc.script }
-
-Calling with args:
-  ${c.this_script} { t:#s.npc.script, a:{some:"args"} }
-
-`
+        return #fs.pobega.usage()
 
     // Corruption char regex using scripts.lib()
     let r = new RegExp(`[${#fs.scripts.lib().corruption_chars}]`),
