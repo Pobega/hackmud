@@ -129,7 +129,6 @@ function (c,a) { // sec:"all"
 
     let output="\n"
 
-    // TODO: Get the output correctly using new data structures.
     try { // If you passed an arg to see just one sec level
         let level = map_args[a.sec]
         output += print_scripts(level)
